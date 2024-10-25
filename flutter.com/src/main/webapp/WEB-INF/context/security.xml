@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+            
+    <!-- Chỉ nên có 1 phần tử <http> -->
+    <http auto-config="false" use-expressions="true" disable-url-rewriting="true">
+    
+        <!-- Cho phép tất cả truy cập vào trang đăng ký -->
+        <intercept-url pattern="/api/register" access="permitAll()" />
+        
+        <!-- login -->
+        <intercept-url pattern="/api/login" access="permitAll()" />
+        
+        <!-- Chỉ cho ADMIN truy cập trang quản trị -->
+        <intercept-url pattern="/quan-tri*" access="hasAnyRole('ADMIN')" />
+         <intercept-url pattern="/addcomment" access="hasAnyRole('USER', 'ADMIN')" />
+         <intercept-url pattern="/updatecomment" access="hasAnyRole('USER', 'ADMIN')" />
+        
+        <!-- Cấu hình khi bị từ chối truy cập -->
+        <access-denied-handler error-page="/accessDenied" />
+        
+        <!-- Cấu hình form đăng nhập -->
+        <form-login  login-page="/dang-nhap"
+                     username-parameter="j_username"
+                     password-parameter="j_password"
+                     login-processing-url="/j_spring_security_check"
+                     authentication-success-handler-ref="customSuccessHandler"
+                     authentication-failure-url="/dang-nhap?incorrectAccount"/>
+                     
+        <!-- Cấu hình khi session hết hạn -->
+        <session-management invalid-session-url="/dang-nhap?sessionTimeout"/>
+        
+        <!-- Cấu hình đăng xuất -->
+        <logout delete-cookies="JSESSIONID"/>
+    </http>
+    
+    <!-- Authentication Manager -->
+    <authentication-manager>
+        <authentication-provider user-service-ref="customUserDetailsService">
+            <password-encoder ref="bcryptEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+    
+    <!-- Bean cho password encoder và user details service -->
+    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+    <beans:bean id="customUserDetailsService" class="com.edu.service.CustomUserDetailsService" />
+    <beans:bean id="customSuccessHandler" class="com.edu.security.CustomSuccessHandler" />
+    
+</beans:beans>
