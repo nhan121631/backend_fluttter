@@ -19,7 +19,8 @@ public class CartItemService {
 	    return cartItemRepository.findByCartIdAndProductId(cartId, productId).isPresent();
 	}
 	
-	public void save(CartitemEntity cartItem){
+	@Transactional
+	public synchronized  void save(CartitemEntity cartItem){
 		cartItemRepository.save(cartItem);
 	}
 	
@@ -36,8 +37,17 @@ public class CartItemService {
 		return cartItemRepository.findByCartId(id);
 	}
 	
+	@Transactional
 	public void delete(Long id) {
 		cartItemRepository.delete(id);
+	}
+	@Transactional
+	public void updateQuantityItem(Long id, int state) {
+		cartItemRepository.updateQuantityItem(id, state);
+	}
+	@Transactional
+	public void deleteByCartId(Long cart_id) {
+		cartItemRepository.deleteByCartId(cart_id);
 	}
 
 }

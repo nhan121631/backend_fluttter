@@ -79,6 +79,10 @@ public class ProductService {
 		return productConverter.toDto(productRepository.save(newEntity));	
 	}
 	
+	public void saveQ(ProductEntity product) {
+			productRepository.save(product);
+	}
+	
 	@Transactional
 	public void delete(long []ids) {
 		for(long id: ids) {

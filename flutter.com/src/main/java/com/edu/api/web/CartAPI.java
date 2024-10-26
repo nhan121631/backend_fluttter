@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -100,6 +101,13 @@ public class CartAPI {
     public ResponseEntity<String> deleteItemCart (@RequestParam("id")Long id){
     	cartItemService.delete(id);
     	return ResponseEntity.ok("Đã xóa Item ra khỏi giỏ hàng");
+    }
+    @PutMapping("api/cart/quantity")
+    public ResponseEntity<String> updateQuatity (@RequestParam("id") Long id,
+    		@RequestParam("state") int state){
+    	System.out.println("id: "+id+ "state: "+state);
+    	cartItemService.updateQuantityItem(id, state);
+    	return ResponseEntity.ok("Thành công");
     }
 
 }

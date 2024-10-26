@@ -37,6 +37,21 @@ public class UserService {
 
         userRepository.save(user);  // Lưu người dùng vào cơ sở dữ liệu
     }
+    
+    public UserEntity findOneById(Long id) {
+    	return userRepository.findOne(id);
+    }
+    
+    public void update(UserEntity user) {
+        System.out.println("Username: " + user.getUserName());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    //    user.setStatus(1);  
+     //   RoleEntity userRole = roleRepository.findByCode("USER");
+      //  user.setRoles(Collections.singletonList(userRole));
+
+        userRepository.save(user);  // Lưu người dùng vào cơ sở dữ liệu
+    }
+    
     public boolean emailExists(String email) {
         return userRepository.existsByEmail(email);
     }

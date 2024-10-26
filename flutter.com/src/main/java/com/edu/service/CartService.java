@@ -2,6 +2,8 @@ package com.edu.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class CartService {
 	    return cartRepository.findByUserId(id).isPresent();
 	}
 	
+	@Transactional
 	public void save(CartEntity cart) {
 		cartRepository.save(cart);
 	}
@@ -24,6 +27,10 @@ public class CartService {
 		Optional<CartEntity> cartOptional = cartRepository.findByUserId(userId);
 		CartEntity cart = cartOptional.get();
 		return cart;
+	}
+	
+	public void delete(Long id) {
+		cartRepository.delete(id);
 	}
 
 }

@@ -20,5 +20,10 @@ public class OrderService {
 	    return items != null ? items : new ArrayList<>();
 	}
 
+	public OrderEntity save(OrderEntity order) {
+		return orderRepository.save(order);
+	}
+	
+	
 
 }

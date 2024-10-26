@@ -40,10 +40,10 @@ public class OrderitemEntity {
 	private int quantity; 
 
 	@Column(name = "price")
-	private float price;  
+	private double price;  
 
 	@Column(name = "total")
-	private float totalPrice;  
+	private double totalPrice;  
 	
 	@Column(name = "createddate")
 	@CreatedDate
@@ -93,19 +93,19 @@ public class OrderitemEntity {
 		this.quantity = quantity;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public float getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(float totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

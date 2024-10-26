@@ -58,7 +58,7 @@ public class OrderEntity {
 	private int payment;
 	
 	@Column(name="total")
-	private float totalPrice;
+	private double totalPrice;
 	
 	@Column(name = "createddate")
 	@CreatedDate
@@ -148,12 +148,12 @@ public class OrderEntity {
 		this.payment = payment;
 	}
 
-	public float getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(float totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setTotalPrice(double total) {
+		this.totalPrice = total;
 	}
 
 	public Date getCreatedDate() {
