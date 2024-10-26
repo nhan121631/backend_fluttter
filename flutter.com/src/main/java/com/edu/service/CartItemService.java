@@ -1,5 +1,7 @@
 package com.edu.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,14 @@ public class CartItemService {
 	
 	public int quantityCart(Long userId) {
 		return cartItemRepository.quantityCart(userId);
+	}
+	
+	public List<CartitemEntity> findByCartId(Long id){
+		return cartItemRepository.findByCartId(id);
+	}
+	
+	public void delete(Long id) {
+		cartItemRepository.delete(id);
 	}
 
 }

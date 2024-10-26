@@ -18,6 +18,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="cartitem")
@@ -30,11 +31,13 @@ public class CartitemEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cart_id")
 	@JsonBackReference
+	//@JsonIgnoreProperties("cartitems")
 	private CartEntity cart;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	@JsonBackReference
+	//@JsonIgnoreProperties("cartitems")
 	private ProductEntity product;
 	
 	@Column(name="quantity")

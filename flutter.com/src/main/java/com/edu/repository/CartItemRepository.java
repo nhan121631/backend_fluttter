@@ -1,7 +1,9 @@
 package com.edu.repository;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,7 +24,10 @@ public interface CartItemRepository extends JpaRepository<CartitemEntity, Long>{
             "INNER JOIN cart c ON ci.cart_id = c.id " +
             "INNER JOIN user u ON c.user_id = u.id " +
             "WHERE u.id = :userId", nativeQuery = true)
-int quantityCart(@Param("userId") Long userId);
+	int quantityCart(@Param("userId") Long userId);
+	
+	@EntityGraph(attributePaths = {"product"})
+	List<CartitemEntity> findByCartId(Long id);
 
 	
 }

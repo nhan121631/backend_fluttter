@@ -1,12 +1,18 @@
 package com.edu.api.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.converter.CartItemConverter;
+import com.edu.dto.CartItemDTO;
 import com.edu.entity.CartEntity;
 import com.edu.entity.CartitemEntity;
 import com.edu.entity.ProductEntity;
@@ -20,6 +26,8 @@ public class CartAPI {
 	private CartItemService cartItemService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private CartItemConverter cartItemConverter;
 	
 	
 	@GetMapping("/api/cart/quantity")
@@ -71,6 +79,27 @@ public class CartAPI {
     	}
         
     }
+    
+    @GetMapping("/api/cart/get")
+    public ResponseEntity<List<CartItemDTO>> getCart(@RequestParam("user_id") Long idUser) {
+    	CartEntity cart = cartService.getOneCart(idUser);    	
+    	List<CartitemEntity> itemCarts = cart.getCartitems();
+        List<CartItemDTO> cartItemDTOs = new ArrayList<>();
+        if (cart == null) {
+            return ResponseEntity.notFound().build(); 
+        }
+        for (CartitemEntity cartitemEntity : itemCarts) {
+            CartItemDTO cartItemDTO = cartItemConverter.convertToDTO(cartitemEntity);
+            
+            cartItemDTOs.add(cartItemDTO);
+        }
+    	return ResponseEntity.ok(cartItemDTOs);
+    }
 
+    @DeleteMapping("api/cart/delete/item")
+    public ResponseEntity<String> deleteItemCart (@RequestParam("id")Long id){
+    	cartItemService.delete(id);
+    	return ResponseEntity.ok("Đã xóa Item ra khỏi giỏ hàng");
+    }
 
 }
