@@ -23,10 +23,5 @@ public class ProductAPI {
 		
 	}
 	
-	@GetMapping("/api/product/getpopular")
-	public List<ProductDTO> getProduct() {
-		List<ProductDTO> lists = new ArrayList<>();
-		lists = productService.getALL();
-		return lists;
-	}
+
 }

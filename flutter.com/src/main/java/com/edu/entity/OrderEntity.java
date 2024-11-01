@@ -21,10 +21,13 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name ="orders")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class OrderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +35,11 @@ public class OrderEntity {
 	
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+ //   @JsonBackReference
     private UserEntity user;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    @JsonManagedReference
+  //  @JsonManagedReference
     private List<OrderitemEntity> orderitems = new ArrayList<>();
 	
 	@Column(name="fullname")

@@ -65,7 +65,7 @@
                 <li>
                     <a href='<c:url value="/quan-tri/product/list?page=1&limit=2"></c:url>'>
                         <i class="menu-icon fa fa-caret-right"></i>
-                        List Prodcut
+                        List Product
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -76,15 +76,15 @@
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                Statistical	
+                Order	
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href='<c:url value="/quan-tri/statiscal/view?page=1&limit=2"></c:url>'>
+                    <a href='<c:url value="/quan-tri/order/list"></c:url>'>
                         <i class="menu-icon fa fa-caret-right"></i>
-                        View
+                        List
                     </a>
                     <b class="arrow"></b>
                 </li>

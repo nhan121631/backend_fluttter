@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.converter.OrderConverter;
 import com.edu.dto.CartItemDTO;
+import com.edu.dto.OrderDTO;
+import com.edu.dto.OrderItemDTO;
+import com.edu.dto.ProductDTO;
 import com.edu.entity.CartEntity;
 import com.edu.entity.CartitemEntity;
+import com.edu.entity.CategoryEntity;
 import com.edu.entity.OrderEntity;
 import com.edu.entity.OrderitemEntity;
 import com.edu.entity.ProductEntity;
@@ -36,11 +41,18 @@ public class OrderAPI {
 	private OrderItemService orderItemService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrderConverter orderConverter;
 
-    @GetMapping("/api/order")
-    public ResponseEntity<List<OrderEntity>> getOrder() {
-        List<OrderEntity> orders = orderService.getAll();    	
-        return ResponseEntity.ok(orders);
+    @GetMapping("/api/order/get")
+    public ResponseEntity<List<OrderDTO>> getOrder(@RequestParam("user_id") Long id) {
+        List<OrderEntity> orders = orderService.findByUserIdAndStatusIsNot(id, 3);    	
+        List<OrderDTO> listorders = new ArrayList<>();
+        for (OrderEntity item : orders) {
+			listorders.add(orderConverter.toDto(item));
+			System.out.println("product: "+item.getOrderitems());
+			}
+        return ResponseEntity.ok(listorders);
     }
     
     

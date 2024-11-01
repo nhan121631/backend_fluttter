@@ -40,8 +40,22 @@ public class ProductService {
 
 	public List<ProductDTO> getALL() {
 		List<ProductDTO> models = new ArrayList<>();
-		List<ProductEntity> entities = productRepository.findAll();
+		//List<ProductEntity> entities = productRepository.findAll();
+		List<ProductEntity> entities = productRepository.getProductPopular();
 	    System.out.println("Số lượng sản phẩm trong cơ sở dữ liệu: " + entities.size()); // Log số lượng sản phẩm
+
+		for (ProductEntity item: entities) {
+			ProductDTO newDTO = productConverter.toDto(item);
+			models.add(newDTO);
+		}
+		return models;
+	}
+	
+
+	public List<ProductDTO> getFilterProduct(double sell1, double sell2) {
+		List<ProductDTO> models = new ArrayList<>();
+		List<ProductEntity> entities = productRepository.getFilterProduct(sell1, sell2);
+	    System.out.println("Số lượng sản phẩm trong cơ sở dữ liệu: " + entities.size()); 
 
 		for (ProductEntity item: entities) {
 			ProductDTO newDTO = productConverter.toDto(item);

@@ -17,7 +17,9 @@
         <intercept-url pattern="/api/login" access="permitAll()" />
         
         <!-- Chỉ cho ADMIN truy cập trang quản trị -->
-        <intercept-url pattern="/quan-tri*" access="hasAnyRole('ADMIN')" />
+        <intercept-url pattern="/quan-tri/home" access="hasAnyRole('ADMIN')" />
+    
+ 		 <intercept-url pattern="/quan-tri/**" access="hasAnyRole('ADMIN')" />
          <intercept-url pattern="/addcomment" access="hasAnyRole('USER', 'ADMIN')" />
          <intercept-url pattern="/updatecomment" access="hasAnyRole('USER', 'ADMIN')" />
         
