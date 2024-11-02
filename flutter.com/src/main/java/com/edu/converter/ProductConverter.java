@@ -1,12 +1,20 @@
 package com.edu.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.edu.dto.ProductDTO;
+import com.edu.dto.ReviewDTO;
 import com.edu.entity.ProductEntity;
+import com.edu.entity.ReviewEntity;
 
 @Component
 public class ProductConverter {
+	@Autowired
+	private ReviewConverter reviewConverter;
 
 	public ProductDTO toDto (ProductEntity entity) {
 		ProductDTO result = new ProductDTO();
@@ -18,6 +26,12 @@ public class ProductConverter {
 		result.setQuantity(entity.getQuantity());
 		result.setThumbnail(entity.getThumbnail());
 		result.setCategoryId(entity.getCategory().getId());
+		
+		List<ReviewDTO> list = new ArrayList<>();
+		for (ReviewEntity item : entity.getReviews()) {
+			list.add(reviewConverter.toDto(item));
+		}
+		result.setReviews(list);
 		return result;
 	}
 	

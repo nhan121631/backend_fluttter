@@ -1,5 +1,8 @@
 package com.edu.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductDTO extends AbstractDTO<ProductDTO>{
 	private Long id;
 	private String name;
@@ -9,6 +12,7 @@ public class ProductDTO extends AbstractDTO<ProductDTO>{
 	private int quantity;
 	private String description;
 	private Long categoryId;
+	private List<ReviewDTO> reviews = new ArrayList<>();
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +60,13 @@ public class ProductDTO extends AbstractDTO<ProductDTO>{
 	}
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+	}
+	
+	public List<ReviewDTO> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<ReviewDTO> reviews) {
+		this.reviews = reviews;
 	}
 	@Override
 	public String toString() {
