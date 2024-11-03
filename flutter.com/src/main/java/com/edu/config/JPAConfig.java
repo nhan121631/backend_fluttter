@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.edu.repository"})
 @EnableTransactionManagement
-@EnableAsync
+//@EnableAsync
 
 public class JPAConfig {
 	

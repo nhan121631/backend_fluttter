@@ -108,7 +108,7 @@
                 window.location.href = "${editNewURL}?id=" + result.id + "&message=insert_success";
             },
             error: function (error) {
-                window.location.href = "${newURL}?page=1&limit=2&message=error_system";
+                window.location.href = "${newURL}?page=1&limit=10&message=error_system";
             }
         });
 	}

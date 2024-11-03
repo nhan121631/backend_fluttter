@@ -50,7 +50,6 @@ public class OrderAPI {
         List<OrderDTO> listorders = new ArrayList<>();
         for (OrderEntity item : orders) {
 			listorders.add(orderConverter.toDto(item));
-			System.out.println("product: "+item.getOrderitems());
 			}
         return ResponseEntity.ok(listorders);
     }

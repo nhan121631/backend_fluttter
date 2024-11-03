@@ -44,7 +44,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href='<c:url value="/quan-tri/category/list?page=1&limit=2"></c:url>'>
+                    <a href='<c:url value="/quan-tri/category/list?page=1&limit=5"></c:url>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         List Category
                     </a>
@@ -63,7 +63,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href='<c:url value="/quan-tri/product/list?page=1&limit=2"></c:url>'>
+                    <a href='<c:url value="/quan-tri/product/list?page=1&limit=10"></c:url>'>
                         <i class="menu-icon fa fa-caret-right"></i>
                         List Product
                     </a>
