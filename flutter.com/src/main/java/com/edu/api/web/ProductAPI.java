@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.edu.converter.ProductConverter;
 import com.edu.dto.ProductDTO;
 import com.edu.entity.ProductEntity;
 import com.edu.service.ProductService;
@@ -26,11 +27,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ProductAPI {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductConverter productConverter;
 	
 	@GetMapping("/api/product/search")
-	public ResponseEntity<List<ProductEntity>> findProduct(@RequestParam("param")String param){
-		List<ProductEntity> products = productService.findProduct(param);    	
-        return ResponseEntity.ok(products);
+	public ResponseEntity<List<ProductDTO>> findProduct(@RequestParam("param")String param){
+		List<ProductEntity> products = productService.findProduct(param);   
+		List<ProductDTO> lists = new ArrayList<>();
+		for (ProductEntity item : products) {
+		lists.add(productConverter.toDto(item));	
+		}
+        return ResponseEntity.ok(lists);
 	}
 	@GetMapping("/api/product/getpopular")
 	public List<ProductDTO> getProduct() {
